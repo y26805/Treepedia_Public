@@ -129,6 +129,35 @@ The [example code](Treepedia/GreenView_Calculate.py#L297-L310) is the collected 
 
 You can open several process to run this code simutaniously, because the output will be saved as txt files in folder. If the output txt file is already there, then the code will move to the next metadata txt file and generate the GVI for next 1000 points.
 
+## Step 3' GVI Calculation of points using semantic segmentation
+
+This step is another way of calculating the green view index with a different algorithm to segment the greenery from step 3. The workflow of this step is based on step 3. Using the semantic segmentation library [here](https://github.com/CSAILVision/semantic-segmentation-pytorch), the algorithm can determine the object types for each pixel in the GSV images and calculate the GVI values. 
+
+In order to run the code for this step, the following environment is required. 
+- Hardware: >=1 GPU
+- Software: Ubuntu 16.04.3 LTS, CUDA>=8.0, Python>=3.5, PyTorch>=0.4.0
+
+Please make sure that your GPU is CUDA-enabled [here](https://developer.nvidia.com/cuda-gpus#compute). If not, one of the best options to run this code is to use a cloud computing service such as Amazon Web Services(AWS).
+
+Install dependencies
+```
+#install mit_semseg library (dependecies of the library are also installed automatically)
+pip install git+https://github.com/CSAILVision/semantic-segmentation-pytorch.git@master
+
+# clone mit_semseg repository to the same folder as Treepedia repository
+git clone https://github.com/CSAILVision/semantic-segmentation-pytorch.git
+```
+
+Run the code
+```
+# after changing relevant parameters in Lines 306-308
+# after editing keys.txt and putting your Google Maps API keys inside
+
+python3 Treepedia/GreenView_Calculate_semseg.py
+```
+
+
+
 ## Step 4: Convert output to shapefile (Optional)
 
 After finishing the computing, you can run the code of "Greenview2Shp.py" [here](Treepedia/Greenview2Shp.py), and save the result as shapefile, if you are more comfortable with shapefile.
